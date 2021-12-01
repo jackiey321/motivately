@@ -20,6 +20,6 @@ export default {
   }
 
   h3 {
-    font-size: 24px;
+    font-size: 20px !important;
   }
 </style>

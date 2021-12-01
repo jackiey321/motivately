@@ -49,5 +49,4 @@ export default {
   .menu-button:hover {
     background-color: #C4C4C4;
   }
-
 </style>

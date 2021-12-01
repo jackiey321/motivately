@@ -77,13 +77,13 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
   h1 {
-    font-size: 36px;
+    font-size: 30px !important;
   }
 
   h2 {
-    font-size: 30px;
+    font-size: 24px !important;
   }
 
   div {

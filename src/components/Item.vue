@@ -21,7 +21,7 @@ export default {
 
 <style scoped>
   h3 {
-    font-size: 24px;
+    font-size: 20px !important;
   }
 
   #label {
