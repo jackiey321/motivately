@@ -2,54 +2,66 @@
   <div>
     <TopBar/>
     <div class="row">
-      <div class="col form-inline">
-        <b-form-input v-model="newTask" placeholder="Enter Task" @keyup.enter="add"></b-form-input><b-button class="ml-2" variant="primary" @click="add">Add</b-button>
+      <div class="col-2">
+        <SideMenu/>
+      </div>
+      <div class="col pt-5 pr-5">
+        <div class="row">
+          <div class="col form-inline">
+            <b-form-input v-model="newTask" placeholder="Enter Task" @keyup.enter="add"></b-form-input><b-button class="ml-2" variant="primary" @click="add">Add</b-button>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-md-3">
+            <div class="p-2 alert alert-secondary">
+              <h3>Backlog</h3>
+              <draggable class="list-group kanban-column" :list="arrBacklog" group="tasks">
+                <div class="list-group-item" v-for="element in arrBacklog" :key="element.name">
+                  {{element.name}}
+                </div>
+              </draggable>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="p-2 alert alert-primary">
+              <h3>In Progress</h3>
+              <draggable class="list-group kanban-column" :list="arrInProgress" group="tasks">
+                <div class="list-group-item" v-for="element in arrInProgress" :key="element.name">
+                  {{element.name}}
+                </div>
+              </draggable>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="p-2 alert alert-success">
+              <h3>Done</h3>
+              <draggable class="list-group kanban-column" :list="arrDone" group="tasks">
+                <div class="list-group-item" v-for="element in arrDone" :key="element.name">
+                  {{element.name}}
+                </div>
+              </draggable>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="row mt-3">
-      <div class="col-md-3">
-        <div class="p-2 alert alert-secondary">
-          <h3>Backlog</h3>
-          <draggable class="list-group kanban-column" :list="arrBacklog" group="tasks">
-            <div class="list-group-item" v-for="element in arrBacklog" :key="element.name">
-              {{element.name}}
-            </div>
-          </draggable>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="p-2 alert alert-primary">
-          <h3>In Progress</h3>
-          <draggable class="list-group kanban-column" :list="arrInProgress" group="tasks">
-            <div class="list-group-item" v-for="element in arrInProgress" :key="element.name">
-              {{element.name}}
-            </div>
-          </draggable>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="p-2 alert alert-success">
-          <h3>Done</h3>
-          <draggable class="list-group kanban-column" :list="arrDone" group="tasks">
-            <div class="list-group-item" v-for="element in arrDone" :key="element.name">
-              {{element.name}}
-            </div>
-          </draggable>
-        </div>
-      </div>
-    </div>
+    <Footer/>
   </div>
 </template>
 
 <script>
 import draggable from "vuedraggable";
 import TopBar from "../../components/TopBar.vue";
+import SideMenu from '../../components/SideMenu.vue';
+import Footer from '../../components/Footer.vue';
 
 export default {
   name: 'App',
   components: {
     draggable,
-    TopBar
+    TopBar,
+    SideMenu,
+    Footer
   },
   data() {
     return {
