@@ -25,8 +25,12 @@
           <div class="col-md-12">
             <h2>To-Do List</h2>
             <ProgressBar :finished="5" :all="12"/>
-            <div class="container mt-4 p-4">
+            <div id="todo-container" class="container mt-4 p-4">
               <ToDo v-for="task in todo" :key="task.name" :name="task.name"/>
+              <div id="add-area">
+                <b-form-input :class="{ hidden: !showInput }" v-model="newToDo" placeholder="Task Name..." @keyup.enter="addToDo"></b-form-input>
+                <img class="ml-2" alt="ToDo List Add" src="../../assets/add.png" height="40px" width="40px" @click="showInput = !showInput">
+              </div>
             </div>
           </div>
         </div>
@@ -66,12 +70,23 @@ export default {
         { name: "Sister Birthday", date: "03.22.2022"},
         { name: "Marathon", date: "03.31.2022"}
       ],
+      newToDo: "",
       todo: [
         { name: "Clean House" },
         { name: "Feed Dog" },
         { name: "Pick Up Children" },
         { name: "Buy Groceries" }
-      ]
+      ],
+      showInput: false
+    }
+  },
+  methods: {
+    addToDo() {
+      if(this.newToDo) {
+        this.todo.push({name: this.newToDo});
+        this.newToDo = "";
+      }
+      this.showInput = false;
     }
   }
 };
@@ -95,4 +110,19 @@ export default {
     border-radius: 10px;
   }
 
+  #todo-container::after {
+    content: " ";
+    display: block; 
+    height: 0; 
+    clear: both;
+  }
+
+  #add-area {
+    display: flex;
+    float: right
+  }
+
+  .hidden {
+    display: none;
+  }
 </style>
