@@ -12,7 +12,7 @@
           </div>
         </div>
         <div class="row mt-3">
-          <div class="col-md-3">
+          <div class="col-md-4">
             <div class="p-2 alert alert-secondary">
               <h3>Backlog</h3>
               <draggable class="list-group kanban-column" :list="arrBacklog" group="tasks">
@@ -22,7 +22,7 @@
               </draggable>
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-4">
             <div class="p-2 alert alert-primary">
               <h3>In Progress</h3>
               <draggable class="list-group kanban-column" :list="arrInProgress" group="tasks">
@@ -32,7 +32,7 @@
               </draggable>
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-4">
             <div class="p-2 alert alert-success">
               <h3>Done</h3>
               <draggable class="list-group kanban-column" :list="arrDone" group="tasks">
@@ -92,6 +92,6 @@ export default {
     font-family: 'Petrona', Arial, Helvetica, sans-serif;
   }
   .kanban-column {
-    min-height: 300px;
+    min-height: 500px;
   }
 </style>

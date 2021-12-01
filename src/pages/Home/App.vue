@@ -6,15 +6,15 @@
         <SideMenu/>
       </div>
       <div class="col pt-5 pr-5">
-        <h1 class="mb-4">Today's Dashboard</h1>
+        <h1>Today's Dashboard</h1>
         <div class="row">
-          <div class="col-md">
+          <div class="col-md-6 mt-4">
             <h2>Upcoming Deadlines</h2>
             <div class="container p-2">
               <Item v-for="deadline in upcomingDeadlines" :key="deadline.name" :name="deadline.name" :date="deadline.date"/>
             </div>
           </div>
-          <div class="col-md">
+          <div class="col-md-6 mt-4">
             <h2>Upcoming Events</h2>
             <div class="container p-2">
               <Item v-for="event in upcomingEvents" :key="event.name" :name="event.name" :date="event.date"/>
@@ -22,7 +22,7 @@
           </div>
         </div>
         <div class="row mt-5 mb-5">
-          <div class="col-md">
+          <div class="col-md-12">
             <h2>To-Do List</h2>
             <ProgressBar :finished="5" :all="12"/>
             <div class="container mt-4 p-4">
