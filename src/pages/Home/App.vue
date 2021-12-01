@@ -24,9 +24,10 @@
         <div class="row mt-5 mb-5">
           <div class="col-md-12">
             <h2>To-Do List</h2>
-            <ProgressBar :finished="5" :all="12"/>
+            <ProgressBar :finished="finished.length" :all="todo.length + finished.length"/>
             <div id="todo-container" class="container mt-4 p-4">
-              <ToDo v-for="task in todo" :key="task.name" :name="task.name"/>
+              <ToDo v-for="task in todo" :key="task.name" :name="task.name" @checked-item="checkedUpdate" @unchecked-item="uncheckedUpdate"/>
+              <ToDo v-for="task in finished" :key="task.name" :name="task.name" @checked-item="checkedUpdate" @unchecked-item="uncheckedUpdate"/>
               <div id="add-area">
                 <b-form-input :class="{ hidden: !showInput }" v-model="newToDo" placeholder="Task Name..." @keyup.enter="addToDo"></b-form-input>
                 <img class="ml-2" alt="ToDo List Add" src="../../assets/add.png" height="40px" width="40px" @click="showInput = !showInput">
@@ -77,6 +78,7 @@ export default {
         { name: "Pick Up Children" },
         { name: "Buy Groceries" }
       ],
+      finished: [],
       showInput: false
     }
   },
@@ -87,6 +89,30 @@ export default {
         this.newToDo = "";
       }
       this.showInput = false;
+    },
+    checkedUpdate(name) {
+      let index = -1;
+      for(let i = 0; i < this.todo.length; i++) {
+        if(this.todo[i].name === name) {
+          index = i;
+        }
+      }
+      if(index > -1) {
+        this.finished.splice(0, 0, this.todo[index]);
+        this.todo.splice(index, 1);
+      }
+    },
+    uncheckedUpdate(name) {
+      let index = -1;
+      for(let i = 0; i < this.finished.length; i++) {
+        if(this.finished[i].name === name) {
+          index = i;
+        }
+      }
+      if(index > -1) {
+        this.todo.splice(this.todo.length, 0, this.finished[index]);
+        this.finished.splice(index, 1);
+      }
     }
   }
 };
