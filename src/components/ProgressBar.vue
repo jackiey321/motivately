@@ -2,8 +2,7 @@
   <div>
     <h3>Progress: {{ Math.round(finished / all * 100) }}%</h3>
     <div id="bar">
-      <div id="progress">
-      </div>
+      <b-progress :value="Math.round(finished / all * 100)" :max="100"></b-progress>
     </div>
   </div>
 </template>
@@ -31,7 +30,7 @@ export default {
   }
 
   #progress {
-    width: 42%;
+    width: 0%;
     height: 10px;
     background-color: #E3B28F;
     border-radius: 10px;
