@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <img alt="checkbox" v-bind:src="src" height="24px" width="24px" @click="switchIcon">
+  <div @click="switchIcon">
+    <img alt="checkbox" v-bind:src="src" height="24px" width="24px">
     <label for="todo" class="ml-2"><h3>{{ name }}</h3></label>
   </div>
 </template>
