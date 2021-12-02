@@ -1,5 +1,5 @@
 <template>
-  <div id="topbar" class="pt-2 pl-5 pr-5">
+  <div id="topbar" class="d-flex justify-content-between pt-2 pl-5 pr-5">
     <a href="/"><h2>motivately</h2></a>
     <div>
       {{ new Date().toDateString() }}
@@ -26,8 +26,6 @@ export default {
   
   #topbar {
     width: 100%;
-    display: flex;
-    justify-content: space-between;
     background-color: #BDD7C1;
   }
 </style>
