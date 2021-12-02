@@ -1,5 +1,5 @@
 <template>
-  <div class="item row m-2 p-3">
+  <div class="text-left item row m-2 p-3">
     <div id="label" class="col-2">
     </div>
     <div class="col">
