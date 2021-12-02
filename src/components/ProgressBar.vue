@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h3>Progress: {{ Math.round(finished / all * 100) }}%</h3>
+    <h3 v-if="all > 0">Progress: {{ Math.round(finished / all * 100) }}%</h3>
+    <h3 v-else>Progress: N/A</h3>
     <b-progress :value="Math.round(finished / all * 100)" :max="100"></b-progress>
   </div>
 </template>
