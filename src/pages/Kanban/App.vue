@@ -8,9 +8,6 @@
       <div class="col pt-5 pr-5">
         <h1>Kanban Board</h1>
         <ProgressBar class="mt-3" :finished="arrDone.length" :all="arrBacklog.length + arrInProgress.length + arrDone.length"/>
-          <!-- <div class="col form-inline">
-            <b-form-input v-model="newTask" placeholder="Enter Task" @keyup.enter="add"></b-form-input><b-button class="ml-2" variant="primary" @click="add">Add</b-button>
-          </div> -->
         <div class="row mt-3 mb-5">
           <div class="text-center col-md-4 mt-4">
             <h2>Backlog</h2>
