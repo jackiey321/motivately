@@ -30,7 +30,7 @@
           <div class="text-center col-md-4 mt-4">
             <h2>Done</h2>
             <div class="kanban-group p-2">
-              <draggable class="list-group kanban-column p-3" :list="arrDone" group="tasks">
+              <draggable class="kanban-column p-3" :list="arrDone" group="tasks">
                 <Item v-for="task in arrDone" :key="task.name" :name="task.name" :date="task.date" :type="task.type"/>
               </draggable>
               <img class="m-3" alt="Done Add" src="../../assets/add.png" height="40px" width="40px" @click="showModal = true; stage = 'done'">
@@ -117,4 +117,5 @@ export default {
   .kanban-column {
     min-height: 500px;
   }
+
 </style>
