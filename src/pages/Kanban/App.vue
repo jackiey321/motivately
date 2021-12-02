@@ -88,6 +88,28 @@ export default {
       }
       this.showModal = false;
     }
+  },
+  mounted() {
+    if(localStorage.arrBacklog) {
+      this.arrBacklog = JSON.parse(localStorage.arrBacklog);
+    }
+    if(localStorage.arrInProgress) {
+      this.arrInProgress = JSON.parse(localStorage.arrInProgress);
+    }
+    if(localStorage.arrDone) {
+      this.arrDone = JSON.parse(localStorage.arrDone);
+    }
+  },
+  watch: {
+    arrBacklog(newBacklog) {
+      localStorage.arrBacklog = JSON.stringify(newBacklog);
+    },
+    arrInProgress(newInProgress) {
+      localStorage.arrInProgress = JSON.stringify(newInProgress);
+    },
+    arrDone(newDone) {
+      localStorage.arrDone = JSON.stringify(newDone);
+    }
   }
 };
 </script>
