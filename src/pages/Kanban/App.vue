@@ -16,30 +16,31 @@
             <h2>Backlog</h2>
             <div class="kanban-group p-2">
               <draggable class="kanban-column p-3" :list="arrBacklog" group="tasks">
-                <Item v-for="task in arrBacklog" :key="task.name" :name="task.name" :date="task.date"/>
+                <Item v-for="task in arrBacklog" :key="task.name" :name="task.name" :date="task.date" :type="task.type"/>
               </draggable>
-              <img class="m-3" alt="Backlog Add" src="../../assets/add.png" height="40px" width="40px">
+              <img class="m-3" alt="Backlog Add" src="../../assets/add.png" height="40px" width="40px" @click="showModal = true; stage = 'backlog'">
             </div>
           </div>
           <div class="text-center col-md-4 mt-4">
             <h2>In Progress</h2>
             <div class="kanban-group p-2">
               <draggable class="kanban-column p-3" :list="arrInProgress" group="tasks">
-                <Item v-for="task in arrInProgress" :key="task.name" :name="task.name" :date="task.date"/>
+                <Item v-for="task in arrInProgress" :key="task.name" :name="task.name" :date="task.date" :type="task.type"/>
               </draggable>
-              <img class="m-3" alt="In Progress Add" src="../../assets/add.png" height="40px" width="40px">
+              <img class="m-3" alt="In Progress Add" src="../../assets/add.png" height="40px" width="40px" @click="showModal = true; stage = 'progress'">
             </div>
           </div>
           <div class="text-center col-md-4 mt-4">
             <h2>Done</h2>
             <div class="kanban-group p-2">
               <draggable class="list-group kanban-column p-3" :list="arrDone" group="tasks">
-                <Item v-for="task in arrDone" :key="task.name" :name="task.name" :date="task.date"/>
+                <Item v-for="task in arrDone" :key="task.name" :name="task.name" :date="task.date" :type="task.type"/>
               </draggable>
-              <img class="m-3" alt="Done Add" src="../../assets/add.png" height="40px" width="40px">
+              <img class="m-3" alt="Done Add" src="../../assets/add.png" height="40px" width="40px" @click="showModal = true; stage = 'done'">
             </div>
           </div>
         </div>
+        <Modal v-if="showModal" @close="showModal = false" @new-task="addTask"/>
       </div>
     </div>
     <Footer/>
@@ -53,6 +54,7 @@ import SideMenu from '../../components/SideMenu.vue';
 import Footer from '../../components/Footer.vue';
 import Item from '../../components/Item.vue';
 import ProgressBar from '../../components/ProgressBar.vue';
+import Modal from '../../components/Modal.vue';
 
 export default {
   name: 'App',
@@ -62,27 +64,32 @@ export default {
     SideMenu,
     Footer,
     Item,
-    ProgressBar
+    ProgressBar,
+    Modal
   },
   data() {
     return {
-      newTask: "",
-      arrBacklog: [
-        {name: "Code Page"},
-        {name: "Do Project"},
-        {name: "Pack Up"},
-        {name: "Black Friday Shopping"}
-      ],
+      arrBacklog: [],
       arrInProgress: [],
-      arrDone: []
+      arrDone: [],
+      showModal: false,
+      stage: ""
     }
   },
   methods: {
-    add() {
-      if(this.newTask) {
-        this.arrBacklog.push({name: this.newTask});
-        this.newTask = "";
+    addTask(task) {
+      if(task.name && task.date && task.type) {
+        if(this.stage === "backlog") {
+          this.arrBacklog.push({name: task.name, date: task.date, type: task.type});
+        }
+        else if(this.stage === "progress") {
+          this.arrInProgress.push({name: task.name, date: task.date, type: task.type});
+        } 
+        else if(this.stage === "done") {
+          this.arrDone.push({name: task.name, date: task.date, type: task.type});
+        }
       }
+      this.showModal = false;
     }
   }
 };
@@ -99,6 +106,10 @@ export default {
 
   div {
     font-family: 'Petrona', Arial, Helvetica, sans-serif;
+  }
+
+  img {
+    cursor: pointer;
   }
 
   .kanban-group {
