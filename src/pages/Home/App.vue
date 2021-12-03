@@ -49,7 +49,7 @@
                   <label for="task-input" class="mt-3 invisible">Task Name</label>
                   <!-- input for new task that is visible after clicking the add button -->
                   <b-form-input id="task-input" :class="{ hidden: !showInput }" v-model="newToDo" placeholder="Task Name..." @keyup.enter="addToDo"></b-form-input>
-                  <img class="ml-2" alt="ToDo List Add" src="../../assets/add.png" height="40px" width="40px" @click="showInput = !showInput">
+                  <img class="ml-2" alt="ToDo List Add" src="../../assets/add.png" height="40px" width="40px" tabIndex="0" @click="showInput = !showInput" @keyup.enter="showInput = !showInput" >
                 </div>
               </div>
             </div>

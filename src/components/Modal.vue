@@ -8,7 +8,7 @@
             <!-- modal header -->
             <div class="d-flex justify-content-between">
               <h2>New Task</h2>
-              <img alt="x icon" src="../assets/x.png" height="40px" width="40px" tabindex="0" @click="$emit('close')">
+              <img alt="x icon" src="../assets/x.png" height="40px" width="40px" tabindex="0" @click="$emit('close')" @keyup.enter="$emit('close')">
             </div>
 
             <!-- modal add task form -->

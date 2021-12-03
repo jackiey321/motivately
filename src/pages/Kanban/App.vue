@@ -18,9 +18,9 @@
               <div class="kanban-group p-2">
                 <draggable class="kanban-column p-3" :list="arrBacklog" group="tasks">
                   <!-- display relevant tasks with reminder if the deadline is within three days -->
-                  <Task v-for="task in arrBacklog" :key="task.id" :id="task.id" :name="task.name" :date="task.date" :type="task.type" :kanban="true" v-bind:class="{ reminder: new Date(task.date) - Date.now() < threeDays }" @delete="deleteTask"/>
+                  <Task v-for="task in arrBacklog" :key="task.id" :id="task.id" :name="task.name" :date="task.date" :type="task.type" :kanban="true" v-bind:class="{ reminder: new Date(task.date) - Date.now() < threeDays }" tabindex="0" @delete="deleteTask"/>
                 </draggable>
-                <img class="m-3" alt="Backlog Add" src="../../assets/add.png" height="40px" width="40px" tabindex="0" @click="showModal = true; stage = 'backlog'">
+                <img class="m-3" alt="Backlog Add" src="../../assets/add.png" height="40px" width="40px" tabindex="0" @click="showModal = true; stage = 'backlog'" @keyup.enter="showModal = true; stage = 'backlog'">
               </div>
             </div>
 
@@ -30,9 +30,9 @@
               <div class="kanban-group p-2">
                 <draggable class="kanban-column p-3" :list="arrInProgress" group="tasks">
                   <!-- display relevant tasks with reminder if the deadline is within three days -->
-                  <Task v-for="task in arrInProgress" :key="task.id" :id="task.id" :name="task.name" :date="task.date" :type="task.type" :kanban="true" v-bind:class="{ reminder: new Date(task.date) - Date.now() < threeDays }" @delete="deleteTask"/>
+                  <Task v-for="task in arrInProgress" :key="task.id" :id="task.id" :name="task.name" :date="task.date" :type="task.type" :kanban="true" v-bind:class="{ reminder: new Date(task.date) - Date.now() < threeDays }" tabindex="0" @delete="deleteTask"/>
                 </draggable>
-                <img class="m-3" alt="In Progress Add" src="../../assets/add.png" height="40px" width="40px" tabindex="0" @click="showModal = true; stage = 'progress'">
+                <img class="m-3" alt="In Progress Add" src="../../assets/add.png" height="40px" width="40px" tabindex="0" @click="showModal = true; stage = 'progress'" @keyup.enter="showModal = true; stage = 'progress'">
               </div>
             </div>
 
@@ -42,9 +42,9 @@
               <div class="kanban-group p-2">
                 <draggable class="kanban-column p-3" :list="arrDone" group="tasks">
                   <!-- display relevant tasks; no reminder needed if completed -->
-                  <Task v-for="task in arrDone" :key="task.id" :id="task.id" :name="task.name" :date="task.date" :type="task.type" :kanban="true" @delete="deleteTask"/>
+                  <Task v-for="task in arrDone" :key="task.id" :id="task.id" :name="task.name" :date="task.date" :type="task.type" :kanban="true" tabindex="0" @delete="deleteTask"/>
                 </draggable>
-                <img class="m-3" alt="Done Add" src="../../assets/add.png" height="40px" width="40px" tabindex="0" @click="showModal = true; stage = 'done'">
+                <img class="m-3" alt="Done Add" src="../../assets/add.png" height="40px" width="40px" tabindex="0" @click="showModal = true; stage = 'done'" @keyup.enter="showModal = true; stage = 'done'">
               </div>
             </div>
           </div>
@@ -200,5 +200,9 @@ export default {
   .reminder {
     border: 2px solid #E3B28F;
     background-color: #faf2ec;
+  }
+
+  .kanban-column div:hover {
+    cursor: pointer;
   }
 </style>

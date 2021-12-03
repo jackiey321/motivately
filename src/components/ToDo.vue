@@ -3,11 +3,11 @@
   <div class="wrapper d-flex justify-content-between m-2 p-3">
     <div class="content">
       <!-- binding alt and src to update dynamically based on if check or unchecked -->
-      <img v-bind:alt="alts[currentImage]" v-bind:src="paths[currentImage]" height="24px" width="24px" @click="switchIcon">
+      <img v-bind:alt="alts[currentImage]" v-bind:src="paths[currentImage]" height="24px" width="24px" tabIndex="0" @click="switchIcon" @keyup.enter="switchIcon">
       <h3 class="ml-2 mb-0">{{ name }}</h3>
     </div>
     <!-- trash icon for deleting -->
-    <img class="m-0" alt="trash icon" src="../assets/trash.png" height="20px" width="20px" @click="$emit('delete', id)">
+    <img class="m-0" alt="trash icon" src="../assets/trash.png" height="20px" width="20px" tabIndex="0" @click="$emit('delete', id)" @keyup.enter="$emit('delete', id)">
   </div>
 </template>
 

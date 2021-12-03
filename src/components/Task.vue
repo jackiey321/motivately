@@ -14,7 +14,7 @@
       <div class="d-flex justify-content-between">
         <p class="m-0">{{ month + "." + day + "." + year }}</p>
         <!-- only display trash icon if on kanban page -->
-        <img v-if="kanban" class="m-0 mt-1" alt="trash icon" src="../assets/trash.png" height="18px" width="18px" @click="$emit('delete', id)">
+        <img v-if="kanban" class="m-0 mt-1" alt="trash icon" src="../assets/trash.png" height="18px" width="18px" tabindex="0" @click="$emit('delete', id)" @keyup.enter="$emit('delete', id)">
       </div>
     </div>
   </div>
