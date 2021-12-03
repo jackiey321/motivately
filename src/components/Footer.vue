@@ -11,7 +11,7 @@ export default {
 </script>
 
 <style scoped>
-  div {
+  footer {
     color: #705133;
     text-align: center;
     background-color: #BDD7C1;
