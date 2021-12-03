@@ -23,11 +23,11 @@ export default {
     switchIcon() {
       if(this.currentImage == 0) {
         this.currentImage = 1;
-        this.$emit("checked-item", this.name);
+        this.$emit("checked-item", this.id);
       }
       else {
         this.currentImage = 0;
-        this.$emit("unchecked-item", this.name);
+        this.$emit("unchecked-item", this.id);
       }
     }
   }
