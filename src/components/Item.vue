@@ -11,7 +11,10 @@
     <div class="col">
       <h3 class="mb-0">{{ name }}</h3>
       <hr class="m-0 mb-1">
-      <p class="m-0">{{ date }}</p>
+      <div class="d-flex justify-content-between">
+        <p class="m-0">{{ date }}</p>
+        <img class="m-0" alt="trash icon" src="../assets/trash.png" height="20px" width="20px" @click="$emit('delete', id)">
+      </div>
     </div>
   </div>
 </template>
@@ -20,6 +23,7 @@
 export default {
   name: 'Item',
   props: {
+    id: Number,
     name: String,
     date: String,
     type: String

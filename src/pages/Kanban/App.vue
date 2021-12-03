@@ -13,7 +13,7 @@
             <h2>Backlog</h2>
             <div class="kanban-group p-2">
               <draggable class="kanban-column p-3" :list="arrBacklog" group="tasks">
-                <Item v-for="task in arrBacklog" :key="task.name" :name="task.name" :date="task.date" :type="task.type" v-bind:class="{ reminder: new Date(task.date) - Date.now() < threeDays }"/>
+                <Item v-for="task in arrBacklog" :key="task.id" :id="task.id" :name="task.name" :date="task.date" :type="task.type" v-bind:class="{ reminder: new Date(task.date) - Date.now() < threeDays }" @delete="deleteTask"/>
               </draggable>
               <img class="m-3" alt="Backlog Add" src="../../assets/add.png" height="40px" width="40px" tabindex="0" @click="showModal = true; stage = 'backlog'">
             </div>
@@ -22,7 +22,7 @@
             <h2>In Progress</h2>
             <div class="kanban-group p-2">
               <draggable class="kanban-column p-3" :list="arrInProgress" group="tasks">
-                <Item v-for="task in arrInProgress" :key="task.name" :name="task.name" :date="task.date" :type="task.type" v-bind:class="{ reminder: new Date(task.date) - Date.now() < threeDays }"/>
+                <Item v-for="task in arrInProgress" :key="task.id" :id="task.id" :name="task.name" :date="task.date" :type="task.type" v-bind:class="{ reminder: new Date(task.date) - Date.now() < threeDays }" @delete="deleteTask"/>
               </draggable>
               <img class="m-3" alt="In Progress Add" src="../../assets/add.png" height="40px" width="40px" tabindex="0" @click="showModal = true; stage = 'progress'">
             </div>
@@ -31,7 +31,7 @@
             <h2>Done</h2>
             <div class="kanban-group p-2">
               <draggable class="kanban-column p-3" :list="arrDone" group="tasks">
-                <Item v-for="task in arrDone" :key="task.name" :name="task.name" :date="task.date" :type="task.type"/>
+                <Item v-for="task in arrDone" :key="task.id" :id="task.id" :name="task.name" :date="task.date" :type="task.type" @delete="deleteTask"/>
               </draggable>
               <img class="m-3" alt="Done Add" src="../../assets/add.png" height="40px" width="40px" tabindex="0" @click="showModal = true; stage = 'done'">
             </div>
@@ -71,23 +71,47 @@ export default {
       arrDone: [],
       showModal: false,
       stage: "",
-      threeDays: 1000 * 60 * 60 * 24 * 3
+      threeDays: 1000 * 60 * 60 * 24 * 3,
+      id: 0
     }
   },
   methods: {
     addTask(task) {
       if(task.name && task.date && task.type) {
         if(this.stage === "backlog") {
-          this.arrBacklog.push({name: task.name, date: task.date, type: task.type});
+          this.arrBacklog.push({ id: this.id, name: task.name, date: task.date, type: task.type });
         }
         else if(this.stage === "progress") {
-          this.arrInProgress.push({name: task.name, date: task.date, type: task.type});
+          this.arrInProgress.push({ id: this.id, name: task.name, date: task.date, type: task.type });
         } 
         else if(this.stage === "done") {
-          this.arrDone.push({name: task.name, date: task.date, type: task.type});
+          this.arrDone.push({ id: this.id, name: task.name, date: task.date, type: task.type });
         }
+        this.id++;
       }
       this.showModal = false;
+    },
+    deleteTask(id) {
+      for(let i = 0; i < this.arrBacklog.length; i++) {
+        if(this.arrBacklog[i].id === id) {
+          this.arrBacklog.splice(i, 1);
+          return;
+        }
+      }
+
+      for(let j = 0; j < this.arrInProgress.length; j++) {
+        if(this.arrInProgress[j].id === id) {
+          this.arrInProgress.splice(j, 1);
+          return;
+        }
+      }
+
+      for(let k = 0; k < this.arrDone.length; k++) {
+        if(this.arrDone[k].id === id) {
+          this.arrDone.splice(k, 1);
+          return;
+        }
+      }
     }
   },
   mounted() {
@@ -100,6 +124,9 @@ export default {
     if(localStorage.arrDone) {
       this.arrDone = JSON.parse(localStorage.arrDone);
     }
+    if(localStorage.taskId) {
+      this.id = parseInt(localStorage.taskId);
+    }
   },
   watch: {
     arrBacklog(newBacklog) {
@@ -110,6 +137,9 @@ export default {
     },
     arrDone(newDone) {
       localStorage.arrDone = JSON.stringify(newDone);
+    },
+    id(newId) {
+      localStorage.taskId = newId;
     }
   }
 };
