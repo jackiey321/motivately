@@ -1,4 +1,5 @@
 <template>
+  <!-- card that displays tasks -->
   <div class="text-left item row m-2 p-3">
     <div v-if="type === 'personal'" class="personal-label">
     </div>
@@ -21,7 +22,7 @@
 
 <script>
 export default {
-  name: 'Item',
+  name: 'Task',
   props: {
     id: Number,
     name: String,

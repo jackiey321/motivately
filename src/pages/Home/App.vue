@@ -12,7 +12,7 @@
             <h2>Upcoming Deadlines</h2>
             <div class="container upcoming p-3">
               <h3 v-if="upcomingDeadlines.length === 0" class="text-center pt-4">No Upcoming Deadlines</h3>
-              <Item v-for="deadline in upcomingDeadlines" :key="deadline.name" :name="deadline.name" :date="deadline.date" :type="deadline.type" v-bind:class="{ reminder: new Date(deadline.date) - Date.now() < threeDays }"/>
+              <Task v-for="deadline in upcomingDeadlines" :key="deadline.name" :name="deadline.name" :date="deadline.date" :type="deadline.type" v-bind:class="{ reminder: new Date(deadline.date) - Date.now() < threeDays }"/>
             </div>
           </div>
           <div class="col-md-6 mt-4">
@@ -48,7 +48,7 @@
 <script>
 import TopBar from '../../components/TopBar.vue';
 import SideMenu from '../../components/SideMenu.vue';
-import Item from '../../components/Item.vue';
+import Task from '../../components/Task.vue';
 import ProgressBar from '../../components/ProgressBar.vue';
 import ToDo from '../../components/ToDo.vue';
 import Footer from '../../components/Footer.vue';
@@ -58,7 +58,7 @@ export default {
   components: {
     TopBar,
     SideMenu,
-    Item,
+    Task,
     ProgressBar,
     ToDo,
     Footer
