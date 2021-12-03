@@ -10,14 +10,15 @@
         <div class="row">
           <div class="col-md-6 mt-4">
             <h2>Upcoming Deadlines</h2>
-            <div class="container p-2">
-              <Item v-for="deadline in upcomingDeadlines" :key="deadline.name" :name="deadline.name" :date="deadline.date"/>
+            <div class="container upcoming p-2">
+              <h3 v-if="upcomingDeadlines.length === 0" class="text-center pt-4">No Upcoming Deadlines</h3>
+              <Item v-for="deadline in upcomingDeadlines" :key="deadline.name" :name="deadline.name" :date="deadline.date" :type="deadline.type"/>
             </div>
           </div>
           <div class="col-md-6 mt-4">
             <h2>Upcoming Events</h2>
-            <div class="container p-2">
-              <Item v-for="event in upcomingEvents" :key="event.name" :name="event.name" :date="event.date"/>
+            <div class="container upcoming p-2">
+              <Item v-for="event in upcomingEvents" :key="event.name" :name="event.name" :date="event.date" :type="event.type"/>
             </div>
           </div>
         </div>
@@ -26,9 +27,7 @@
             <h2>To-Do List</h2>
             <ProgressBar :finished="finished.length" :all="todo.length + finished.length"/>
             <div id="todo-container" class="container mt-4 p-4">
-              <div v-if="todo.length === 0 && finished.length === 0">
-                <h3>Currently Empty</h3>
-              </div>
+              <h3 v-if="todo.length === 0 && finished.length === 0" class="text-center pt-4">Currently Empty</h3>
               <ToDo v-for="task in todo" :key="task.name" :name="task.name" :status="0" @checked-item="checkedUpdate" @unchecked-item="uncheckedUpdate"/>
               <ToDo v-for="task in finished" :key="task.name" :name="task.name" :status="1" @checked-item="checkedUpdate" @unchecked-item="uncheckedUpdate"/>
               <div id="add-area">
@@ -64,11 +63,7 @@ export default {
   },
   data() {
     return {
-      upcomingDeadlines: [
-        { name: "Paint Project", date: "03.17.2022"},
-        { name: "Marathon Training", date: "03.29.2022"},
-        { name: "Tax Returns", date: "04.15.2022"}
-      ],
+      upcomingDeadlines: [],
       upcomingEvents: [
         { name: "Dinner Date", date: "03.19.2022"},
         { name: "Sister Birthday", date: "03.22.2022"},
@@ -120,6 +115,22 @@ export default {
     if(localStorage.finished) {
       this.finished = JSON.parse(localStorage.finished);
     }
+    if(localStorage.arrBacklog || localStorage.arrInProgress) {
+      let tasks = [];
+      if(localStorage.arrBacklog) {
+        tasks = tasks.concat(JSON.parse(localStorage.arrBacklog));
+      }
+      if(localStorage.arrInProgress) {
+        tasks = tasks.concat(JSON.parse(localStorage.arrInProgress));
+      }
+      tasks.sort((a, b) => new Date(b.date) - new Date(a.date));
+      if(tasks.length > 3) {
+        this.upcomingDeadlines = tasks.slice(0, 3);
+      }
+      else {
+        this.upcomingDeadlines = tasks;
+      }
+    }
   },
   watch: {
     todo(newToDo) {
@@ -150,6 +161,14 @@ export default {
     border-radius: 10px;
   }
 
+  .hidden {
+    display: none;
+  }
+
+  .upcoming {
+    min-height: 303px;
+  }
+
   #todo-container::after {
     content: " ";
     display: block; 
@@ -160,9 +179,5 @@ export default {
   #add-area {
     display: flex;
     float: right
-  }
-
-  .hidden {
-    display: none;
   }
 </style>
