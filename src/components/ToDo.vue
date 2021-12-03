@@ -1,7 +1,10 @@
 <template>
-  <div @click="switchIcon">
-    <img alt="checkbox" v-bind:src="paths[currentImage]" height="24px" width="24px">
-    <label for="todo" class="ml-2"><h3>{{ name }}</h3></label>
+  <div class="wrapper d-flex justify-content-between m-2 p-3">
+    <div class="content">
+      <img alt="checkbox" v-bind:src="paths[currentImage]" height="24px" width="24px" @click="switchIcon">
+      <h3 class="ml-2 mb-0">{{ name }}</h3>
+    </div>
+    <img class="m-0" alt="trash icon" src="../assets/trash.png" height="20px" width="20px" @click="$emit('delete', id)">
   </div>
 </template>
 
@@ -35,11 +38,22 @@ export default {
 </script>
 
 <style scoped>
-  div {
+  .wrapper {
+    width: 60%;
+    display: flex;
+    background-color: white;
+    border-radius: 10px;
+  }
+
+  .content {
     display: flex;
   }
 
   h3 {
     font-size: 20px !important;
+  }
+
+  img:hover {
+    cursor: pointer;
   }
 </style>

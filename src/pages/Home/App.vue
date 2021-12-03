@@ -28,8 +28,8 @@
             <ProgressBar :finished="finished.length" :all="todo.length + finished.length"/>
             <div id="todo-container" class="container mt-4 p-4">
               <h3 v-if="todo.length === 0 && finished.length === 0" class="text-center pt-4">Currently Empty</h3>
-              <ToDo v-for="task in todo" :key="task.id" :name="task.name" :id="task.id" :status="0" @checked-item="checkedUpdate" @unchecked-item="uncheckedUpdate"/>
-              <ToDo v-for="task in finished" :key="task.id" :name="task.name" :id="task.id" :status="1" @checked-item="checkedUpdate" @unchecked-item="uncheckedUpdate"/>
+              <ToDo v-for="task in todo" :key="task.id" :name="task.name" :id="task.id" :status="0" @checked-item="checkedUpdate" @unchecked-item="uncheckedUpdate" @delete="deleteToDo"/>
+              <ToDo v-for="task in finished" :key="task.id" :name="task.name" :id="task.id" :status="1" @checked-item="checkedUpdate" @unchecked-item="uncheckedUpdate" @delete="deleteToDo"/>
               <div id="add-area">
                 <b-form-input :class="{ hidden: !showInput }" v-model="newToDo" placeholder="Task Name..." @keyup.enter="addToDo"></b-form-input>
                 <img class="ml-2" alt="ToDo List Add" src="../../assets/add.png" height="40px" width="40px" @click="showInput = !showInput">
@@ -86,28 +86,33 @@ export default {
       }
       this.showInput = false;
     },
-    checkedUpdate(id) {
-      let index = -1;
+    deleteToDo(id) {
       for(let i = 0; i < this.todo.length; i++) {
         if(this.todo[i].id === id) {
-          index = i;
+          this.todo.splice(i, 1);
         }
       }
-      if(index > -1) {
-        this.finished.splice(0, 0, this.todo[index]);
-        this.todo.splice(index, 1);
+
+      for(let j = 0; j < this.finished.length; j++) {
+        if(this.finished[j].id === id) {
+          this.finished.splice(j, 1);
+        }
+      }
+    },
+    checkedUpdate(id) {
+      for(let i = 0; i < this.todo.length; i++) {
+        if(this.todo[i].id === id) {
+          this.finished.splice(0, 0, this.todo[i]);
+          this.todo.splice(i, 1);
+        }
       }
     },
     uncheckedUpdate(id) {
-      let index = -1;
       for(let i = 0; i < this.finished.length; i++) {
         if(this.finished[i].id === id) {
-          index = i;
+          this.todo.splice(this.todo.length, 0, this.finished[index]);
+          this.finished.splice(index, 1);
         }
-      }
-      if(index > -1) {
-        this.todo.splice(this.todo.length, 0, this.finished[index]);
-        this.finished.splice(index, 1);
       }
     }
   },
