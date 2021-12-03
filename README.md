@@ -1,36 +1,13 @@
-# Building a MPA application
+# motivately
 
-Setup is pretty easy. The main part is in `vue.config.js`, which is where you will write the guidelines for Vue to compile the application as a multi-page application.
+The purpose of my website is to serve as a planning tool for both daily tasks and long term tasks. I incorporated features that would make it easier for people to navigate everything they have to do everyday. This website, therefore, relies heavily on user input. The target audience of this website consists of students and young-adults who lead very busy lives, so the overall visual design was decided upon to bring a calming but still vibrant setting to their lives. 
 
-Here, I take the example of separating folders into:
+On the dashboard, users can view their three closest deadlines that have yet to be completed. A deadline will be highlighted if it is very close (within three days). This is meant to keep the user on track and initiate a call to action. There is also a space for the user to jot down notes. The last aspect of this dashboard is the to-do list where users can add shorter term tasks, check them off, or completely remove them. A progress bar with a percent is displayed to show much of the to-do list is finished with a clear visual and numerical cue. 
 
-- `assets`: any extra files
-- `components`: `.vue` components
-- `pages`: set of directories with the pair `page.vue` and `page.js`, where `page.vue` would be the view of the page you want to create and `page.js` the JS instructions for this page.
+On the kanban board, users can organize their long term tasks. They can add tasks into any of the three stages of the kanban board. Then, they can drag and drop the tasks around to move them from one stage to another. Similar to on the dashboard, very close and still unfinished deadlines are highlighted and a progress bar is displayed. Users can also delete tasks from the kanban once they are no longer needed. 
 
-Note that if you do a standard installation of CLI VueJS, there will be the pair `App.vue` and `main.js`. The set of pages I mentioned above, is exactly this pair, repeating itself for each new page you need - including here, I still keep those names.
+By making it easy for a user to track their progress and see reminders, this application hopes to better motivate people to finish their plans and organize their time, hence the name: motivately.
 
-As I mentioned above, the entire configuration is actually found in `vue.config.js`, in the `pages` property.
-
-This is where you will register all pages and their data:
-
-- `entry`: main JS file (aka `main.js`)
-- `template`: template that this page will use. Here, you can feel free to explore multiple templates and connect them at will to your pages.
-- `title`: the title / name of this page
-- `chunks`: if you want to name this page
-
-After that, everything is exactly like the normal CLI, and can be customized at will.
-
-## Disclaimer
-
-I would like to take this space to explain some points:
-
-- I am not an expert or experienced in programming or VueJS
-- It turns out that I needed to develop an application using the concept of multi-page, but I found myself lost in the official explanation on the VueJS website
-- I also didn't find good references on the internet or on StackOverflow, about how to really configure this application
-- After some time reading and trying, I was finally able to configure - although it is nothing really abnormal
-- So, when I came across the question on StackOverflow, asking the same question that I had, I understood that it would be cool to provide an answer as I would have liked to find back there
-- And this is what this repository is: a very practical answer on how to configure multi-page in VueJS
 
 ## Project setup
 
