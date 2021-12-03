@@ -1,7 +1,7 @@
 <template>
-  <div class="p-2">
+  <footer class="p-2">
     <p class="m-0">Copyright &copy; 2021 motivately</p>
-  </div>
+  </footer>
 </template>
 
 <script>
@@ -12,7 +12,7 @@ export default {
 
 <style scoped>
   div {
-    color: #805C3B;
+    color: #705133;
     text-align: center;
     background-color: #BDD7C1;
   }
