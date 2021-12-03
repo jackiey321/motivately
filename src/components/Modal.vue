@@ -9,9 +9,9 @@
               <img alt="x icon" src="../assets/x.png" height="40px" width="40px" tabindex="0" @click="$emit('close')">
             </div>
             <label for="name" class="mt-3">Task Name</label>
-            <b-form-input id="name" if="name" v-model="name" required></b-form-input>
+            <b-form-input if="name" v-model="name" required></b-form-input>
             <label for="type" class="mt-3">Task Type</label>
-            <b-form-select id="type" v-model="type" :options="options" required></b-form-select>
+            <b-form-select v-model="type" :options="options" required></b-form-select>
             <label for="date" class="mt-3" required>Due Date</label>
             <b-form-datepicker id="date" v-model="date" :min="new Date()" class="mb-2"></b-form-datepicker>
             <div class="text-center">

@@ -17,9 +17,8 @@
           </div>
           <div class="col-md-6 mt-4">
             <h2>Notes</h2>
-            <div class="container upcoming p-3 px-4">
-              <label for="notes" class="m-0">Jot Down Your Notes</label>
-              <b-form-textarea id="notes" v-model="notes" rows="10" no-resize></b-form-textarea>
+            <div class="container upcoming p-4">
+              <b-form-textarea id="textarea" v-model="notes" placeholder="Jot Down Your Notes..." rows="10" no-resize></b-form-textarea>
             </div>
           </div>
         </div>
@@ -32,8 +31,7 @@
               <ToDo v-for="task in todo" :key="task.id" :name="task.name" :id="task.id" :status="0" @checked-item="checkedUpdate" @unchecked-item="uncheckedUpdate" @delete="deleteToDo"/>
               <ToDo v-for="task in finished" :key="task.id" :name="task.name" :id="task.id" :status="1" @checked-item="checkedUpdate" @unchecked-item="uncheckedUpdate" @delete="deleteToDo"/>
               <div id="add-area">
-                <label for="task-input" class="m-0 invisible">Task Name</label>
-                <b-form-input id="task-input" :class="{ hidden: !showInput }" v-model="newToDo" placeholder="Task Name..." @keyup.enter="addToDo"></b-form-input>
+                <b-form-input :class="{ hidden: !showInput }" v-model="newToDo" placeholder="Task Name..." @keyup.enter="addToDo"></b-form-input>
                 <img class="ml-2" alt="ToDo List Add" src="../../assets/add.png" height="40px" width="40px" @click="showInput = !showInput">
               </div>
             </div>
