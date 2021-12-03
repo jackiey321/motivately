@@ -16,9 +16,9 @@
             </div>
           </div>
           <div class="col-md-6 mt-4">
-            <h2>Upcoming Events</h2>
-            <div class="container upcoming p-2">
-              <Item v-for="event in upcomingEvents" :key="event.name" :name="event.name" :date="event.date" :type="event.type"/>
+            <h2>Notes</h2>
+            <div class="container upcoming p-3">
+              <b-form-textarea id="textarea" v-model="notes" placeholder="Jot Down Your Notes..." rows="11" no-resize></b-form-textarea>
             </div>
           </div>
         </div>
@@ -74,7 +74,8 @@ export default {
       finished: [],
       showInput: false,
       threeDays: 1000 * 60 * 60 * 24 * 3,
-      id: 0
+      id: 0,
+      notes: ""
     }
   },
   methods: {
@@ -147,6 +148,10 @@ export default {
     if(localStorage.todoId) {
       this.id = parseInt(localStorage.todoId);
     }
+
+    if(localStorage.notes) {
+      this.notes = localStorage.notes;
+    }
   },
   watch: {
     todo(newToDo) {
@@ -157,6 +162,9 @@ export default {
     },
     id(newId) {
       localStorage.todoId = newId;
+    },
+    notes(newNotes) {
+      localStorage.notes = newNotes;
     }
   }
 };
@@ -185,7 +193,7 @@ export default {
   }
 
   .upcoming {
-    min-height: 315px;
+    height: 315px;
   }
 
   #todo-container::after {
@@ -207,5 +215,10 @@ export default {
 
   img:hover {
     cursor: pointer;
+  }
+
+  textarea {
+    height: 100%;
+    border-radius: 10px;
   }
 </style>
