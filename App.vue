@@ -32,7 +32,7 @@
               <ToDo v-for="task in finished" :key="task.id" :name="task.name" :id="task.id" :status="1" @checked-item="checkedUpdate" @unchecked-item="uncheckedUpdate" @delete="deleteToDo"/>
               <div id="add-area">
                 <b-form-input :class="{ hidden: !showInput }" v-model="newToDo" placeholder="Task Name..." @keyup.enter="addToDo"></b-form-input>
-                <img class="ml-2" alt="ToDo List Add" src="../../assets/add.png" height="40px" width="40px" @click="showInput = !showInput">
+                <img class="ml-2" alt="ToDo List Add" src="src/assets/add.png" height="40px" width="40px" @click="showInput = !showInput">
               </div>
             </div>
           </div>
@@ -44,12 +44,12 @@
 </template>
 
 <script>
-import TopBar from '../../components/TopBar.vue';
-import SideMenu from '../../components/SideMenu.vue';
-import Item from '../../components/Item.vue';
-import ProgressBar from '../../components/ProgressBar.vue';
-import ToDo from '../../components/ToDo.vue';
-import Footer from '../../components/Footer.vue';
+import TopBar from './src/components/TopBar.vue';
+import SideMenu from './src/components/SideMenu.vue';
+import Item from './src/components/Item.vue';
+import ProgressBar from './src/components/ProgressBar.vue';
+import ToDo from './src/components/ToDo.vue';
+import Footer from './src/components/Footer.vue';
 
 export default {
   name: 'App',

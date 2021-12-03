@@ -2,7 +2,7 @@ module.exports = {
   publicPath: process.env.NODE_ENV === 'production' ? '/motivately/' : '/',
   pages: {
     'index': {
-      entry: './src/pages/Home/main.js',
+      entry: './main.js',
       template: 'public/index.html',
       title: 'Home',
       chunks: [ 'chunk-vendors', 'chunk-common', 'index' ]
