@@ -3,7 +3,7 @@
     <TopBar/>
     <div class="row">
       <div class="col-2">
-        <SideMenu/>
+        <SideMenu :current="'dashboard'"/>
       </div>
       <div class="col pt-5 pr-5">
         <h1>Today's Dashboard</h1>
@@ -26,7 +26,7 @@
           <div class="col-md-12">
             <h2>To-Do List</h2>
             <ProgressBar :finished="finished.length" :all="todo.length + finished.length"/>
-            <div id="todo-container" class="container mt-4 p-4">
+            <div id="todo-container" class="container mt-4 p-2">
               <h3 v-if="todo.length === 0 && finished.length === 0" class="text-center pt-4">Currently Empty</h3>
               <ToDo v-for="task in todo" :key="task.id" :name="task.name" :id="task.id" :status="0" @checked-item="checkedUpdate" @unchecked-item="uncheckedUpdate" @delete="deleteToDo"/>
               <ToDo v-for="task in finished" :key="task.id" :name="task.name" :id="task.id" :status="1" @checked-item="checkedUpdate" @unchecked-item="uncheckedUpdate" @delete="deleteToDo"/>
@@ -112,8 +112,8 @@ export default {
     uncheckedUpdate(id) {
       for(let i = 0; i < this.finished.length; i++) {
         if(this.finished[i].id === id) {
-          this.todo.splice(this.todo.length, 0, this.finished[index]);
-          this.finished.splice(index, 1);
+          this.todo.splice(this.todo.length, 0, this.finished[i]);
+          this.finished.splice(i, 1);
         }
       }
     }
@@ -203,5 +203,9 @@ export default {
   .reminder {
     border: 2px solid #E3B28F;
     background-color: #faf2ec;
+  }
+
+  img:hover {
+    cursor: pointer;
   }
 </style>

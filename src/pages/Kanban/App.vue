@@ -3,7 +3,7 @@
     <TopBar/>
     <div class="row">
       <div class="col-2">
-        <SideMenu/>
+        <SideMenu :current="'kanban'"/>
       </div>
       <div class="col pt-5 pr-5">
         <h1>Kanban Board</h1>
