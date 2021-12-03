@@ -10,7 +10,6 @@ On the kanban board, users can organize their long term tasks. They can add task
 
 By making it easy for a user to track their progress and see reminders, this application hopes to better motivate people to finish their plans and organize their time, hence the name: motivately.
 
-
 ## Project setup
 
 ### Install
@@ -30,19 +29,3 @@ npm run serve
 ``` bash
 npm run build
 ```
-
-### Run your tests
-
-``` bash
-npm run test
-```
-
-### Lints and fixes files
-
-``` bash
-npm run lint
-```
-
-### Customize configuration
-
-See '[Configuration Reference](https://cli.vuejs.org/config/)' on VueJS CLI Official Website.
