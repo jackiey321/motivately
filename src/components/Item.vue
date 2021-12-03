@@ -21,7 +21,7 @@ export default {
   name: 'Item',
   props: {
     name: String,
-    date: Date,
+    date: String,
     type: String
   }
 };
