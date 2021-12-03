@@ -31,6 +31,7 @@
               <ToDo v-for="task in todo" :key="task.id" :name="task.name" :id="task.id" :status="0" @checked-item="checkedUpdate" @unchecked-item="uncheckedUpdate" @delete="deleteToDo"/>
               <ToDo v-for="task in finished" :key="task.id" :name="task.name" :id="task.id" :status="1" @checked-item="checkedUpdate" @unchecked-item="uncheckedUpdate" @delete="deleteToDo"/>
               <div id="add-area">
+                <label for="task-input" class="mt-3 invisible">Task Name</label>
                 <b-form-input id="task-input" :class="{ hidden: !showInput }" v-model="newToDo" placeholder="Task Name..." @keyup.enter="addToDo"></b-form-input>
                 <img class="ml-2" alt="ToDo List Add" src="../../assets/add.png" height="40px" width="40px" @click="showInput = !showInput">
               </div>
