@@ -13,7 +13,7 @@
       <hr class="m-0 mb-1">
       <div class="d-flex justify-content-between">
         <p class="m-0">{{ month + "." + day + "." + year }}</p>
-        <img v-if="kanban" class="m-0" alt="trash icon" src="../assets/trash.png" height="18px" width="18px" @click="$emit('delete', id)">
+        <img v-if="kanban" class="m-0 mt-1" alt="trash icon" src="../assets/trash.png" height="18px" width="18px" @click="$emit('delete', id)">
       </div>
     </div>
   </div>
