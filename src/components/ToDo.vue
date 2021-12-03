@@ -1,6 +1,6 @@
 <template>
   <div @click="switchIcon">
-    <img alt="checkbox" v-bind:src="src" height="24px" width="24px">
+    <img alt="checkbox" v-bind:src="paths[currentImage]" height="24px" width="24px">
     <label for="todo" class="ml-2"><h3>{{ name }}</h3></label>
   </div>
 </template>
@@ -10,25 +10,23 @@ export default {
   name: 'ToDo',
   props: {
     id: Number,
-    name: String
+    name: String,
+    status: Number
   },
   data() {
     return {
-      src: require("@/assets/unchecked.png"),
-      currentImage: 0
+      paths: [require("@/assets/unchecked.png"), require("@/assets/checked.png")],
+      currentImage: this.status
     }
   },
   methods: {
     switchIcon() {
       if(this.currentImage == 0) {
-        this.src = require("@/assets/checked.png");
         this.currentImage = 1;
         this.$emit("checked-item", this.name);
       }
       else {
-        this.src = require("@/assets/unchecked.png");
         this.currentImage = 0;
-        this.$emit("unchecked-item", this.name);
         this.$emit("unchecked-item", this.name);
       }
     }

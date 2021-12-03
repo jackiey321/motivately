@@ -26,8 +26,11 @@
             <h2>To-Do List</h2>
             <ProgressBar :finished="finished.length" :all="todo.length + finished.length"/>
             <div id="todo-container" class="container mt-4 p-4">
-              <ToDo v-for="task in todo" :key="task.name" :name="task.name" @checked-item="checkedUpdate" @unchecked-item="uncheckedUpdate"/>
-              <ToDo v-for="task in finished" :key="task.name" :name="task.name" @checked-item="checkedUpdate" @unchecked-item="uncheckedUpdate"/>
+              <div v-if="todo.length === 0 && finished.length === 0">
+                <h3>Currently Empty</h3>
+              </div>
+              <ToDo v-for="task in todo" :key="task.name" :name="task.name" :status="0" @checked-item="checkedUpdate" @unchecked-item="uncheckedUpdate"/>
+              <ToDo v-for="task in finished" :key="task.name" :name="task.name" :status="1" @checked-item="checkedUpdate" @unchecked-item="uncheckedUpdate"/>
               <div id="add-area">
                 <b-form-input :class="{ hidden: !showInput }" v-model="newToDo" placeholder="Task Name..." @keyup.enter="addToDo"></b-form-input>
                 <img class="ml-2" alt="ToDo List Add" src="../../assets/add.png" height="40px" width="40px" @click="showInput = !showInput">
@@ -72,12 +75,7 @@ export default {
         { name: "Marathon", date: "03.31.2022"}
       ],
       newToDo: "",
-      todo: [
-        { name: "Clean House" },
-        { name: "Feed Dog" },
-        { name: "Pick Up Children" },
-        { name: "Buy Groceries" }
-      ],
+      todo: [],
       finished: [],
       showInput: false
     }
@@ -113,6 +111,22 @@ export default {
         this.todo.splice(this.todo.length, 0, this.finished[index]);
         this.finished.splice(index, 1);
       }
+    }
+  },
+  mounted() {
+    if(localStorage.todo) {
+      this.todo = JSON.parse(localStorage.todo);
+    }
+    if(localStorage.finished) {
+      this.finished = JSON.parse(localStorage.finished);
+    }
+  },
+  watch: {
+    todo(newToDo) {
+      localStorage.todo = JSON.stringify(newToDo)
+    },
+    finished(newFinished) {
+      localStorage.finished = JSON.stringify(newFinished)
     }
   }
 };
