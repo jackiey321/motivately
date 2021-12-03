@@ -12,7 +12,7 @@
             <h2>Upcoming Deadlines</h2>
             <div class="container upcoming p-2">
               <h3 v-if="upcomingDeadlines.length === 0" class="text-center pt-4">No Upcoming Deadlines</h3>
-              <Item v-for="deadline in upcomingDeadlines" :key="deadline.name" :name="deadline.name" :date="deadline.date" :type="deadline.type"/>
+              <Item v-for="deadline in upcomingDeadlines" :key="deadline.name" :name="deadline.name" :date="deadline.date" :type="deadline.type" v-bind:class="{ reminder: new Date(deadline.date) - Date.now() < threeDays }"/>
             </div>
           </div>
           <div class="col-md-6 mt-4">
@@ -72,7 +72,8 @@ export default {
       newToDo: "",
       todo: [],
       finished: [],
-      showInput: false
+      showInput: false,
+      threeDays: 1000 * 60 * 60 * 24 * 3
     }
   },
   methods: {
@@ -123,7 +124,7 @@ export default {
       if(localStorage.arrInProgress) {
         tasks = tasks.concat(JSON.parse(localStorage.arrInProgress));
       }
-      tasks.sort((a, b) => new Date(b.date) - new Date(a.date));
+      tasks.sort((a, b) => new Date(a.date) - new Date(b.date));
       if(tasks.length > 3) {
         this.upcomingDeadlines = tasks.slice(0, 3);
       }
@@ -166,7 +167,7 @@ export default {
   }
 
   .upcoming {
-    min-height: 303px;
+    min-height: 315px;
   }
 
   #todo-container::after {
@@ -179,5 +180,10 @@ export default {
   #add-area {
     display: flex;
     float: right
+  }
+  
+  .reminder {
+    border: 2px solid #E3B28F;
+    background-color: #faf2ec;
   }
 </style>
