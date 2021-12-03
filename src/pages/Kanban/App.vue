@@ -13,7 +13,7 @@
             <h2>Backlog</h2>
             <div class="kanban-group p-2">
               <draggable class="kanban-column p-3" :list="arrBacklog" group="tasks">
-                <Item v-for="task in arrBacklog" :key="task.id" :id="task.id" :name="task.name" :date="task.date" :type="task.type" v-bind:class="{ reminder: new Date(task.date) - Date.now() < threeDays }" @delete="deleteTask"/>
+                <Item v-for="task in arrBacklog" :key="task.id" :id="task.id" :name="task.name" :date="task.date" :type="task.type" :kanban="true" v-bind:class="{ reminder: new Date(task.date) - Date.now() < threeDays }" @delete="deleteTask"/>
               </draggable>
               <img class="m-3" alt="Backlog Add" src="../../assets/add.png" height="40px" width="40px" tabindex="0" @click="showModal = true; stage = 'backlog'">
             </div>
@@ -22,7 +22,7 @@
             <h2>In Progress</h2>
             <div class="kanban-group p-2">
               <draggable class="kanban-column p-3" :list="arrInProgress" group="tasks">
-                <Item v-for="task in arrInProgress" :key="task.id" :id="task.id" :name="task.name" :date="task.date" :type="task.type" v-bind:class="{ reminder: new Date(task.date) - Date.now() < threeDays }" @delete="deleteTask"/>
+                <Item v-for="task in arrInProgress" :key="task.id" :id="task.id" :name="task.name" :date="task.date" :type="task.type" :kanban="true" v-bind:class="{ reminder: new Date(task.date) - Date.now() < threeDays }" @delete="deleteTask"/>
               </draggable>
               <img class="m-3" alt="In Progress Add" src="../../assets/add.png" height="40px" width="40px" tabindex="0" @click="showModal = true; stage = 'progress'">
             </div>
@@ -31,7 +31,7 @@
             <h2>Done</h2>
             <div class="kanban-group p-2">
               <draggable class="kanban-column p-3" :list="arrDone" group="tasks">
-                <Item v-for="task in arrDone" :key="task.id" :id="task.id" :name="task.name" :date="task.date" :type="task.type" @delete="deleteTask"/>
+                <Item v-for="task in arrDone" :key="task.id" :id="task.id" :name="task.name" :date="task.date" :type="task.type" :kanban="true" @delete="deleteTask"/>
               </draggable>
               <img class="m-3" alt="Done Add" src="../../assets/add.png" height="40px" width="40px" tabindex="0" @click="showModal = true; stage = 'done'">
             </div>

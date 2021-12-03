@@ -12,8 +12,8 @@
       <h3 class="mb-0">{{ name }}</h3>
       <hr class="m-0 mb-1">
       <div class="d-flex justify-content-between">
-        <p class="m-0">{{ date }}</p>
-        <img class="m-0" alt="trash icon" src="../assets/trash.png" height="20px" width="20px" @click="$emit('delete', id)">
+        <p class="m-0">{{ month + "." + day + "." + year }}</p>
+        <img v-if="kanban" class="m-0" alt="trash icon" src="../assets/trash.png" height="18px" width="18px" @click="$emit('delete', id)">
       </div>
     </div>
   </div>
@@ -26,7 +26,15 @@ export default {
     id: Number,
     name: String,
     date: String,
-    type: String
+    type: String,
+    kanban: Boolean
+  },
+  data() {
+    return {
+      month: new Date(this.date).getUTCMonth() + 1,
+      day: new Date(this.date).getUTCDate(),
+      year: new Date(this.date).getUTCFullYear()
+    }
   }
 };
 </script>
@@ -60,5 +68,9 @@ export default {
   .item {
     background-color: white;
     border-radius: 10px;
+  }
+
+  img:hover {
+    cursor: pointer;
   }
 </style>
