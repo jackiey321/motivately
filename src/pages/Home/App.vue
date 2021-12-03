@@ -18,8 +18,8 @@
           <div class="col-md-6 mt-4">
             <h2>Notes</h2>
             <div class="container upcoming p-3 px-4">
-              <label for="textarea" class="m-0">Jot Down Notes Here</label>
-              <b-form-textarea id="textarea" v-model="notes" rows="10" no-resize></b-form-textarea>
+              <label for="notes-input" class="m-0">Jot Down Notes Here</label>
+              <b-form-textarea id="notes-input" v-model="notes" rows="10" no-resize></b-form-textarea>
             </div>
           </div>
         </div>
