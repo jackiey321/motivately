@@ -1,6 +1,6 @@
 <template>
   <div id="sidemenu" class="p-2 pl-4 pr-4">
-    <a href="/">
+    <a href="index">
       <div v-bind:class="{ active: current === 'dashboard' }" class="menu-button p-2 m-1">
         Dashboard
       </div>

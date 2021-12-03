@@ -1,6 +1,6 @@
 <template>
   <div id="topbar" class="d-flex justify-content-between pt-2 pl-5 pr-5">
-    <a href="/"><h2>motivately</h2></a>
+    <a href="index"><h2>motivately</h2></a>
     <div>
       {{ new Date().toDateString() }}
       <img class="ml-3" alt="profile icon" src="../assets/profile.png" height="40" width="40">
