@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper d-flex justify-content-between m-2 p-3">
     <div class="content">
-      <img alt="checkbox" v-bind:src="paths[currentImage]" height="24px" width="24px" @click="switchIcon">
+      <img v-bind:alt="alts[currentImage]" v-bind:src="paths[currentImage]" height="24px" width="24px" @click="switchIcon">
       <h3 class="ml-2 mb-0">{{ name }}</h3>
     </div>
     <img class="m-0" alt="trash icon" src="../assets/trash.png" height="20px" width="20px" @click="$emit('delete', id)">
@@ -19,6 +19,7 @@ export default {
   data() {
     return {
       paths: [require("@/assets/unchecked.png"), require("@/assets/checked.png")],
+      alts: ["unchecked box", "checked box"],
       currentImage: this.status
     }
   },
