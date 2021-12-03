@@ -1,43 +1,56 @@
 <template>
   <div>
+    <!-- header -->
     <TopBar/>
     <div class="row">
+      <!-- side menu -->
       <div class="col-2">
         <SideMenu :current="'kanban'"/>
       </div>
       <div class="col pt-5 pr-5">
-        <h1>Kanban Board</h1>
-        <ProgressBar class="mt-3" :finished="arrDone.length" :all="arrBacklog.length + arrInProgress.length + arrDone.length"/>
-        <div class="row mt-3 mb-5">
-          <div class="text-center col-md-4 mt-4">
-            <h2>Backlog</h2>
-            <div class="kanban-group p-2">
-              <draggable class="kanban-column p-3" :list="arrBacklog" group="tasks">
-                <Task v-for="task in arrBacklog" :key="task.id" :id="task.id" :name="task.name" :date="task.date" :type="task.type" :kanban="true" v-bind:class="{ reminder: new Date(task.date) - Date.now() < threeDays }" @delete="deleteTask"/>
-              </draggable>
-              <img class="m-3" alt="Backlog Add" src="../../assets/add.png" height="40px" width="40px" tabindex="0" @click="showModal = true; stage = 'backlog'">
+        <main>
+          <h1>Kanban Board</h1>
+          <ProgressBar class="mt-3" :finished="arrDone.length" :all="arrBacklog.length + arrInProgress.length + arrDone.length"/>
+          <div class="row mt-3 mb-5">
+            <!-- backlog column -->
+            <div class="text-center col-md-4 mt-4">
+              <h2>Backlog</h2>
+              <div class="kanban-group p-2">
+                <draggable class="kanban-column p-3" :list="arrBacklog" group="tasks">
+                  <!-- display relevant tasks with reminder if the deadline is within three days -->
+                  <Task v-for="task in arrBacklog" :key="task.id" :id="task.id" :name="task.name" :date="task.date" :type="task.type" :kanban="true" v-bind:class="{ reminder: new Date(task.date) - Date.now() < threeDays }" @delete="deleteTask"/>
+                </draggable>
+                <img class="m-3" alt="Backlog Add" src="../../assets/add.png" height="40px" width="40px" tabindex="0" @click="showModal = true; stage = 'backlog'">
+              </div>
+            </div>
+
+            <!-- in progress column -->
+            <div class="text-center col-md-4 mt-4">
+              <h2>In Progress</h2>
+              <div class="kanban-group p-2">
+                <draggable class="kanban-column p-3" :list="arrInProgress" group="tasks">
+                  <!-- display relevant tasks with reminder if the deadline is within three days -->
+                  <Task v-for="task in arrInProgress" :key="task.id" :id="task.id" :name="task.name" :date="task.date" :type="task.type" :kanban="true" v-bind:class="{ reminder: new Date(task.date) - Date.now() < threeDays }" @delete="deleteTask"/>
+                </draggable>
+                <img class="m-3" alt="In Progress Add" src="../../assets/add.png" height="40px" width="40px" tabindex="0" @click="showModal = true; stage = 'progress'">
+              </div>
+            </div>
+
+            <!-- done column -->
+            <div class="text-center col-md-4 mt-4">
+              <h2>Done</h2>
+              <div class="kanban-group p-2">
+                <draggable class="kanban-column p-3" :list="arrDone" group="tasks">
+                  <!-- display relevant tasks; no reminder needed if completed -->
+                  <Task v-for="task in arrDone" :key="task.id" :id="task.id" :name="task.name" :date="task.date" :type="task.type" :kanban="true" @delete="deleteTask"/>
+                </draggable>
+                <img class="m-3" alt="Done Add" src="../../assets/add.png" height="40px" width="40px" tabindex="0" @click="showModal = true; stage = 'done'">
+              </div>
             </div>
           </div>
-          <div class="text-center col-md-4 mt-4">
-            <h2>In Progress</h2>
-            <div class="kanban-group p-2">
-              <draggable class="kanban-column p-3" :list="arrInProgress" group="tasks">
-                <Task v-for="task in arrInProgress" :key="task.id" :id="task.id" :name="task.name" :date="task.date" :type="task.type" :kanban="true" v-bind:class="{ reminder: new Date(task.date) - Date.now() < threeDays }" @delete="deleteTask"/>
-              </draggable>
-              <img class="m-3" alt="In Progress Add" src="../../assets/add.png" height="40px" width="40px" tabindex="0" @click="showModal = true; stage = 'progress'">
-            </div>
-          </div>
-          <div class="text-center col-md-4 mt-4">
-            <h2>Done</h2>
-            <div class="kanban-group p-2">
-              <draggable class="kanban-column p-3" :list="arrDone" group="tasks">
-                <Task v-for="task in arrDone" :key="task.id" :id="task.id" :name="task.name" :date="task.date" :type="task.type" :kanban="true" @delete="deleteTask"/>
-              </draggable>
-              <img class="m-3" alt="Done Add" src="../../assets/add.png" height="40px" width="40px" tabindex="0" @click="showModal = true; stage = 'done'">
-            </div>
-          </div>
-        </div>
-        <Modal v-if="showModal" @close="showModal = false" @new-task="addTask"/>
+          <!-- add new task modal -->
+          <Modal v-if="showModal" @close="showModal = false" @new-task="addTask"/>
+        </main>
       </div>
     </div>
     <Footer/>
@@ -66,16 +79,22 @@ export default {
   },
   data() {
     return {
+      // lists for kanban tasks
       arrBacklog: [],
       arrInProgress: [],
       arrDone: [],
+      // aid in modal display
       showModal: false,
+      // current stage to add to 
       stage: "",
+      // milliseconds in three days
       threeDays: 1000 * 60 * 60 * 24 * 3,
+      // task id
       id: 0
     }
   },
   methods: {
+    // add given task to the current stage selected
     addTask(task) {
       if(task.name && task.date && task.type) {
         if(this.stage === "backlog") {
@@ -91,6 +110,7 @@ export default {
       }
       this.showModal = false;
     },
+    // delete task from any of the columns
     deleteTask(id) {
       for(let i = 0; i < this.arrBacklog.length; i++) {
         if(this.arrBacklog[i].id === id) {
@@ -115,6 +135,7 @@ export default {
     }
   },
   mounted() {
+    // retrieve data from local storage
     if(localStorage.arrBacklog) {
       this.arrBacklog = JSON.parse(localStorage.arrBacklog);
     }
@@ -129,6 +150,7 @@ export default {
     }
   },
   watch: {
+    // update local storage as data changes
     arrBacklog(newBacklog) {
       localStorage.arrBacklog = JSON.stringify(newBacklog);
     },

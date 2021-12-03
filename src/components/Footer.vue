@@ -1,4 +1,5 @@
 <template>
+  <!-- footer component of every page -->
   <footer class="p-2">
     <p class="m-0">Copyright &copy; 2021 motivately</p>
   </footer>

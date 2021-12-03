@@ -1,5 +1,7 @@
 <template>
+  <!-- navigation menu on the side -->
   <div id="sidemenu" class="p-2 pl-4 pr-4">
+    <!-- buttons have conditional classes to mark which page is active -->
     <a href="index">
       <div v-bind:class="{ active: current === 'dashboard' }" class="menu-button p-2 m-1">
         Dashboard
@@ -34,12 +36,6 @@ export default {
     text-decoration: none;
   }
 
-  #sidemenu {
-    height: 100%;
-    text-align: center;
-    background-color: #F3E3D8;
-  }
-
   .menu-button {
     border-radius: 10px;
   }
@@ -50,5 +46,11 @@ export default {
 
   .active {
     background-color: #C4C4C4;
+  }
+
+  #sidemenu {
+    height: 100%;
+    text-align: center;
+    background-color: #F3E3D8;
   }
 </style>

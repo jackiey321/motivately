@@ -1,19 +1,19 @@
 <template>
   <!-- card that displays tasks -->
   <div class="text-left item row m-2 p-3">
+    <!-- assign class to choose label color based on task type -->
     <div v-if="type === 'personal'" class="personal-label">
     </div>
     <div v-else-if="type === 'work'" class="work-label">
     </div>
-    <div v-else-if="type === 'other'" class="other-label">
-    </div>
-    <div v-else class="label">
+    <div v-else class="other-label">
     </div>
     <div class="col">
       <h3 class="mb-0">{{ name }}</h3>
       <hr class="m-0 mb-1">
       <div class="d-flex justify-content-between">
         <p class="m-0">{{ month + "." + day + "." + year }}</p>
+        <!-- only display trash icon if on kanban page -->
         <img v-if="kanban" class="m-0 mt-1" alt="trash icon" src="../assets/trash.png" height="18px" width="18px" @click="$emit('delete', id)">
       </div>
     </div>
@@ -32,6 +32,7 @@ export default {
   },
   data() {
     return {
+      // to aid reformatting of date
       month: new Date(this.date).getUTCMonth() + 1,
       day: new Date(this.date).getUTCDate(),
       year: new Date(this.date).getUTCFullYear()
@@ -43,6 +44,10 @@ export default {
 <style scoped>
   h3 {
     font-size: 20px !important;
+  }
+
+  img:hover {
+    cursor: pointer;
   }
 
   .personal-label {
@@ -69,9 +74,5 @@ export default {
   .item {
     background-color: white;
     border-radius: 10px;
-  }
-
-  img:hover {
-    cursor: pointer;
   }
 </style>

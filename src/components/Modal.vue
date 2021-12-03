@@ -1,19 +1,25 @@
-// Adapted from: https://codesandbox.io/s/github/vuejs/vuejs.org/tree/master/src/v2/examples/vue-20-modal-component?from-embed=&file=/index.html:1164-1354
 <template>
+  <!-- modal for add task form -->
+  <!-- adapted from: https://codesandbox.io/s/github/vuejs/vuejs.org/tree/master/src/v2/examples/vue-20-modal-component?from-embed=&file=/index.html:1164-1354 -->
   <transition name="modal">
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
+            <!-- modal header -->
             <div class="d-flex justify-content-between">
               <h2>New Task</h2>
               <img alt="x icon" src="../assets/x.png" height="40px" width="40px" tabindex="0" @click="$emit('close')">
             </div>
+
+            <!-- modal add task form -->
             <label for="name" class="mt-3">Task Name</label>
             <b-form-input id="name" if="name" v-model="name" required></b-form-input>
             <label for="type" class="mt-3">Task Type</label>
             <b-form-select id="type" v-model="type" :options="options" required></b-form-select>
             <label for="date" class="mt-3" required>Due Date</label>
             <b-form-datepicker id="date" v-model="date" :min="new Date()" class="mb-2"></b-form-datepicker>
+
+            <!-- modal submit -->
             <div class="text-center">
               <b-button class="mt-5" @click="sendData">Add</b-button>
             </div>
@@ -28,9 +34,11 @@ export default {
   name: 'Item',
   data() {
     return {
-      name: "",
+      // data of new task
+      name: "",  
       date: "",
       type: null,
+      // type options for dropdown
       options: [
         { value: null, text: 'Select Type' },
         { value: 'personal', text: 'Personal' },
@@ -40,6 +48,7 @@ export default {
     }
   },
   methods: {
+    // emit submitted info to parent for creating new task
     sendData() {
       this.$emit('new-task', {name: this.name, date: this.date, type: this.type});
     }
@@ -51,6 +60,20 @@ export default {
 h2 {
   text-decoration: underline #BDD7C1 5px;
 }
+
+button {
+  background-color: #E3B28F;
+}
+
+button:hover {
+  background-color: #C4C4C4;
+}
+
+img:hover {
+  cursor: pointer;
+}
+
+/* CSS from sample modal */
 .modal-mask {
   position: fixed;
   z-index: 9998;
@@ -81,17 +104,5 @@ h2 {
 
 .modal-default-button {
   float: right;
-}
-
-button {
-  background-color: #E3B28F;
-}
-
-button:hover {
-  background-color: #C4C4C4;
-}
-
-img:hover {
-  cursor: pointer;
 }
 </style>

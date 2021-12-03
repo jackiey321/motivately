@@ -1,9 +1,12 @@
 <template>
+  <!-- to do list entry -->
   <div class="wrapper d-flex justify-content-between m-2 p-3">
     <div class="content">
+      <!-- binding alt and src to update dynamically based on if check or unchecked -->
       <img v-bind:alt="alts[currentImage]" v-bind:src="paths[currentImage]" height="24px" width="24px" @click="switchIcon">
       <h3 class="ml-2 mb-0">{{ name }}</h3>
     </div>
+    <!-- trash icon for deleting -->
     <img class="m-0" alt="trash icon" src="../assets/trash.png" height="20px" width="20px" @click="$emit('delete', id)">
   </div>
 </template>
@@ -18,6 +21,7 @@ export default {
   },
   data() {
     return {
+      // to aid in switching between check or unchecked
       paths: [require("@/assets/unchecked.png"), require("@/assets/checked.png")],
       alts: ["unchecked box", "checked box"],
       currentImage: this.status
@@ -25,6 +29,7 @@ export default {
   },
   methods: {
     switchIcon() {
+      // conduct actual switching of checked or unchecked
       if(this.currentImage == 0) {
         this.currentImage = 1;
         this.$emit("checked-item", this.id);
@@ -39,6 +44,14 @@ export default {
 </script>
 
 <style scoped>
+  h3 {
+    font-size: 20px !important;
+  }
+
+  img:hover {
+    cursor: pointer;
+  }
+
   .wrapper {
     width: 60%;
     display: flex;
@@ -48,13 +61,5 @@ export default {
 
   .content {
     display: flex;
-  }
-
-  h3 {
-    font-size: 20px !important;
-  }
-
-  img:hover {
-    cursor: pointer;
   }
 </style>
