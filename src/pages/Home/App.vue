@@ -80,7 +80,7 @@ export default {
   methods: {
     addToDo() {
       if(this.newToDo) {
-        this.todo.push({name: this.newToDo, id: this.id});
+        this.todo.push({ id: this.id, name: this.newToDo });
         this.id++;
         this.newToDo = "";
       }
@@ -90,12 +90,14 @@ export default {
       for(let i = 0; i < this.todo.length; i++) {
         if(this.todo[i].id === id) {
           this.todo.splice(i, 1);
+          return;
         }
       }
 
       for(let j = 0; j < this.finished.length; j++) {
         if(this.finished[j].id === id) {
           this.finished.splice(j, 1);
+          return;
         }
       }
     },
@@ -120,9 +122,11 @@ export default {
     if(localStorage.todo) {
       this.todo = JSON.parse(localStorage.todo);
     }
+    
     if(localStorage.finished) {
       this.finished = JSON.parse(localStorage.finished);
     }
+    
     if(localStorage.arrBacklog || localStorage.arrInProgress) {
       let tasks = [];
       if(localStorage.arrBacklog) {
@@ -139,6 +143,10 @@ export default {
         this.upcomingDeadlines = tasks;
       }
     }
+    
+    if(localStorage.todoId) {
+      this.id = parseInt(localStorage.todoId);
+    }
   },
   watch: {
     todo(newToDo) {
@@ -146,6 +154,9 @@ export default {
     },
     finished(newFinished) {
       localStorage.finished = JSON.stringify(newFinished)
+    },
+    id(newId) {
+      localStorage.todoId = newId;
     }
   }
 };
