@@ -1,18 +1,13 @@
 <template>
   <div id="sidemenu" class="p-2 pl-4 pr-4">
     <a href="/">
-      <div class="menu-button p-2 m-1">
+      <div v-bind:class="{ active: current === 'dashboard' }" class="menu-button p-2 m-1">
         Dashboard
       </div>
     </a>
     <a href="kanban">
-      <div class="menu-button p-2 m-1">
+      <div v-bind:class="{ active: current === 'kanban' }" class="menu-button p-2 m-1">
         Kanban
-      </div>
-    </a>
-    <a href="calendar">
-      <div class="menu-button p-2 m-1">
-        Calendar
       </div>
     </a>
   </div>
@@ -20,7 +15,10 @@
 
 <script>
 export default {
-  name: 'SideMenu'
+  name: 'SideMenu',
+  props: {
+    current: String
+  } 
 };
 </script>
 
@@ -47,6 +45,10 @@ export default {
   }
 
   .menu-button:hover {
+    background-color: #C4C4C4;
+  }
+
+  .active {
     background-color: #C4C4C4;
   }
 </style>
