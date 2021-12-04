@@ -1,4 +1,4 @@
-![motivately-logo](public/favicon.ico) # motivately
+# motivately ![motivately-logo](public/favicon.ico)
 
 ## Links
 
