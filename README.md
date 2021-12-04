@@ -1,5 +1,10 @@
 # motivately
 
+## Links
+
+Website: https://jackiey321.github.io/motivately/index 
+Video: https://drive.google.com/file/d/1SiWRGRev9yxrJixs8iXvCHE8MMHehkGD/view?usp=sharing 
+
 ## Description
 
 The purpose of my website is to serve as a planning tool for both daily tasks and long term tasks. I incorporated features that would make it easier for people to navigate everything they have to do everyday. This website, therefore, relies heavily on user input. The target audience of this website consists of students and young-adults who lead very busy lives, so the overall visual design was decided upon to bring a calming but still vibrant setting to their lives. 
